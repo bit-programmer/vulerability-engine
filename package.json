@@ -1,0 +1,33 @@
+{
+  "name": "vulnerability-engine",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "lint": "eslint .",
+    "lint:fix": "pnpm lint --fix",
+    "generate:schema": "npx drizzle-kit generate",
+    "generate:migrations": "npx drizzle-kit migrate"
+  },
+  "dependencies": {
+    "@auth/drizzle-adapter": "^1.11.0",
+    "@hono/node-server": "^1.19.5",
+    "@hono/zod-openapi": "^1.1.4",
+    "@libsql/client": "^0.15.15",
+    "dotenv": "^17.2.3",
+    "drizzle-orm": "^0.44.6",
+    "hono": "^4.10.1",
+    "uuid": "^13.0.0",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^6.0.0",
+    "@types/node": "^20.11.17",
+    "drizzle-kit": "^0.31.5",
+    "eslint": "^9.37.0",
+    "eslint-plugin-format": "^1.0.2",
+    "tsx": "^4.7.1",
+    "typescript": "^5.8.3"
+  }
+}
