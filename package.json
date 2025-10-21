@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc && tsx-alias",
+    "build": "tsc && tsc-alias",
     "start": "node dist/index.js",
     "lint": "eslint .",
     "lint:fix": "pnpm lint --fix",
