@@ -48,8 +48,11 @@ app.get("/generatetoken", async (c) => {
         }, 401);
     }
 
+    const response = await fetch('https://glitch-operation.vercel.app/api/v1/contest-submission/1');
+    const { uniqueGeneratedCode } = await response.json();
+
     return c.json({
-        message: uuidv4(),
+        message: uniqueGeneratedCode,
     }, 200);
 
 })
