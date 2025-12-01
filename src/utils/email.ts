@@ -39,7 +39,7 @@ export async function sendAcceptanceEmail(isAccepted: boolean) {
 
   const mailOptions = {
     from: EMAIL_USER,
-    to: 'harsh.81928@gmail.com',
+    to: 'Smeet.niper2023@gmail.com',
     subject,
     html: htmlContent,
   }
