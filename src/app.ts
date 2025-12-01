@@ -3,6 +3,7 @@ import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { sign, verify } from 'hono/jwt'
 import { db } from './core/db/index.js'
+import { sendAcceptanceEmail } from './utils/email.js'
 import { JWT_SECRET } from './utils/constants.js'
 
 const app = new Hono()
@@ -15,6 +16,36 @@ app.get('/', (c) => {
   return c.json({
     message: 'Hello World',
   })
+})
+
+app.get('/notify', async (c) => {
+  const isAcceptedParam = c.req.query('isAccepted')
+  
+  if (!isAcceptedParam) {
+    return c.json({
+      success: false,
+      message: 'Missing isAccepted query parameter',
+    }, 400)
+  }
+
+  const isAccepted = isAcceptedParam.toLowerCase() === 'true'
+  
+  const result = await sendAcceptanceEmail(isAccepted)
+  
+  if (result.success) {
+    return c.json({
+      success: true,
+      message: 'Email sent successfully',
+      messageId: result.messageId,
+    }, 200)
+  }
+  else {
+    return c.json({
+      success: false,
+      message: 'Failed to send email',
+      error: result.error,
+    }, 500)
+  }
 })
 
 app.post('/secure/login', async (c) => {
